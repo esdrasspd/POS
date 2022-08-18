@@ -6,6 +6,7 @@ public class FrmIUMain extends javax.swing.JFrame {
 
     public FrmIUMain() {
         initComponents();
+        this.setLocationRelativeTo(this);
     }
 
  
