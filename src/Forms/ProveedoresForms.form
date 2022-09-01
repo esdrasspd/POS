@@ -40,10 +40,10 @@
                               <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel2" min="-2" pref="104" max="-2" attributes="0"/>
                               <Component id="jLabel1" alignment="0" min="-2" pref="104" max="-2" attributes="0"/>
-                              <Component id="jLabel4" alignment="0" min="-2" pref="84" max="-2" attributes="0"/>
                               <Component id="TxtProveevor" max="32767" attributes="0"/>
                               <Component id="TxtTelefono" alignment="0" max="32767" attributes="0"/>
                               <Component id="TxtDireccion" alignment="0" min="-2" pref="243" max="-2" attributes="0"/>
+                              <Component id="jLabel4" alignment="0" min="-2" pref="117" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="TxtUuid" min="-2" pref="149" max="-2" attributes="0"/>
@@ -153,7 +153,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="UUID"/>
+        <Property name="text" type="java.lang.String" value="C&#xf3;digo Proveedor"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="TxtUuid">
