@@ -16,7 +16,7 @@ import logic.Classes;
 
 /**
  *
- * @author serho
+ * @author Esdras Abel Sapón Díaz
  */
 public class FrmLogin extends javax.swing.JFrame {
     
@@ -322,8 +322,8 @@ public class FrmLogin extends javax.swing.JFrame {
                 resultado = 1;
                 
                 if(resultado==1){
-                    Classes.ExecuteIUMain();
-                    JOptionPane.showMessageDialog(null,"Conexion exitosa a la base de datos");
+                    Classes.ExecuteMenuOptions();
+                    JOptionPane.showMessageDialog(null,"Datos correctos. Bienvenido al sistema Formain");
                     this.dispose();
                 }
                 
