@@ -4,24 +4,41 @@
  */
 package Forms;
 
-import javax.swing.JOptionPane;
+
 import logic.AddImage;
+import logic.Classes;
+import conections.ShowData;
+import java.sql.PreparedStatement;
+import conections.ConnectionSQL;
+import conections.DeleteData;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
 
 /**
  *
  * @author serho
  */
 public class FrmCatProd extends javax.swing.JFrame {
+    ConnectionSQL con = new ConnectionSQL();
+    DeleteData delete = new DeleteData();
 
     int xMouse, yMouse;
+    List<String> column = new ArrayList<>();
     /**
      * Creates new form FrmCatProd
      */
     public FrmCatProd() {
         initComponents();
-        AddImage.SetImageLabel(imgSalir, "src/images/salir.png");
-        AddImage.SetImageLabel(imgFamProd, "src/images/familias de productos.png");
+        AddImage.SetImageLabel(btnSalir, "src/images/atras.png");
+        column.add("Codigo");
+        column.add("Nombre de la categoria o familia");
         this.setLocationRelativeTo(this);
+        mostrarDatos();
     }
 
     /**
@@ -43,22 +60,23 @@ public class FrmCatProd extends javax.swing.JFrame {
         btnGuardar = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         btnModificar = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        btnCancelar = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        imgSalir = new javax.swing.JLabel();
-        imgFamProd = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        btnSalir = new javax.swing.JLabel();
+        btnCancelar1 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
-        setMinimumSize(new java.awt.Dimension(956, 643));
+        setMinimumSize(new java.awt.Dimension(1442, 625));
         setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblCatProds.setFont(new java.awt.Font("Roboto Cn", 1, 48)); // NOI18N
         lblCatProds.setText("CATEGORÍAS O FAMILIAS DE PRODUCTOS");
-        getContentPane().add(lblCatProds, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, -1, -1));
+        getContentPane().add(lblCatProds, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, -1, -1));
 
         jPanel1.setBackground(new java.awt.Color(51, 153, 255));
 
@@ -99,9 +117,9 @@ public class FrmCatProd extends javax.swing.JFrame {
 
         getContentPane().add(header, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, 30));
 
-        lblCodCatProd.setFont(new java.awt.Font("Roboto", 1, 30)); // NOI18N
+        lblCodCatProd.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         lblCodCatProd.setText("Código de la categoría o familia de producto:");
-        getContentPane().add(lblCodCatProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 170, -1, 40));
+        getContentPane().add(lblCodCatProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 170, -1, 40));
 
         fldCodCatProd.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         fldCodCatProd.addActionListener(new java.awt.event.ActionListener() {
@@ -109,11 +127,11 @@ public class FrmCatProd extends javax.swing.JFrame {
                 fldCodCatProdActionPerformed(evt);
             }
         });
-        getContentPane().add(fldCodCatProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 240, 670, 50));
+        getContentPane().add(fldCodCatProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 240, 350, 50));
 
-        lblNomCatProd.setFont(new java.awt.Font("Roboto", 1, 30)); // NOI18N
+        lblNomCatProd.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
         lblNomCatProd.setText("Nombre de la categoría o familia de producto:");
-        getContentPane().add(lblNomCatProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 330, -1, 40));
+        getContentPane().add(lblNomCatProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 330, -1, 40));
 
         fldNomCatProd.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         fldNomCatProd.addActionListener(new java.awt.event.ActionListener() {
@@ -121,9 +139,9 @@ public class FrmCatProd extends javax.swing.JFrame {
                 fldNomCatProdActionPerformed(evt);
             }
         });
-        getContentPane().add(fldNomCatProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 400, 670, 50));
+        getContentPane().add(fldNomCatProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 400, 350, 50));
 
-        btnGuardar.setBackground(new java.awt.Color(153, 255, 153));
+        btnGuardar.setBackground(new java.awt.Color(102, 255, 51));
         btnGuardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -151,66 +169,91 @@ public class FrmCatProd extends javax.swing.JFrame {
                 .addGap(24, 24, 24))
         );
 
-        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 490, 170, 80));
+        getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 520, 170, 80));
 
-        btnModificar.setBackground(new java.awt.Color(255, 255, 153));
+        btnModificar.setBackground(new java.awt.Color(255, 255, 51));
         btnModificar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnModificar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnModificarMouseClicked(evt);
+            }
+        });
 
-        jLabel3.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
-        jLabel3.setText("Modificar");
+        jLabel4.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        jLabel4.setText("Modificar");
 
         javax.swing.GroupLayout btnModificarLayout = new javax.swing.GroupLayout(btnModificar);
         btnModificar.setLayout(btnModificarLayout);
         btnModificarLayout.setHorizontalGroup(
             btnModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnModificarLayout.createSequentialGroup()
-                .addContainerGap(35, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addGap(32, 32, 32))
+                .addContainerGap(36, Short.MAX_VALUE)
+                .addComponent(jLabel4)
+                .addGap(31, 31, 31))
         );
         btnModificarLayout.setVerticalGroup(
             btnModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnModificarLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jLabel3)
-                .addContainerGap(26, Short.MAX_VALUE))
-        );
-
-        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 490, 170, 80));
-
-        btnCancelar.setBackground(new java.awt.Color(255, 102, 102));
-        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        jLabel4.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
-        jLabel4.setText("Eliminar");
-
-        javax.swing.GroupLayout btnCancelarLayout = new javax.swing.GroupLayout(btnCancelar);
-        btnCancelar.setLayout(btnCancelarLayout);
-        btnCancelarLayout.setHorizontalGroup(
-            btnCancelarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnCancelarLayout.createSequentialGroup()
-                .addGap(42, 42, 42)
-                .addComponent(jLabel4)
-                .addContainerGap(41, Short.MAX_VALUE))
-        );
-        btnCancelarLayout.setVerticalGroup(
-            btnCancelarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnCancelarLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnModificarLayout.createSequentialGroup()
                 .addContainerGap(28, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addGap(23, 23, 23))
         );
 
-        getContentPane().add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 490, 170, 80));
+        getContentPane().add(btnModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 520, 170, 80));
 
-        imgSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        imgSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTable1.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 970, 420));
+
+        btnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSalir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                imgSalirMouseClicked(evt);
+                btnSalirMouseClicked(evt);
             }
         });
-        getContentPane().add(imgSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 530, 100, 100));
-        getContentPane().add(imgFamProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 230, 140, 210));
+        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 520, 190, 100));
+
+        btnCancelar1.setBackground(new java.awt.Color(255, 51, 51));
+        btnCancelar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancelar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCancelar1MouseClicked(evt);
+            }
+        });
+
+        jLabel5.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        jLabel5.setText("Eliminar");
+
+        javax.swing.GroupLayout btnCancelar1Layout = new javax.swing.GroupLayout(btnCancelar1);
+        btnCancelar1.setLayout(btnCancelar1Layout);
+        btnCancelar1Layout.setHorizontalGroup(
+            btnCancelar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnCancelar1Layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(jLabel5)
+                .addContainerGap(41, Short.MAX_VALUE))
+        );
+        btnCancelar1Layout.setVerticalGroup(
+            btnCancelar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnCancelar1Layout.createSequentialGroup()
+                .addContainerGap(28, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addGap(23, 23, 23))
+        );
+
+        getContentPane().add(btnCancelar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 520, 170, 80));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -224,12 +267,14 @@ public class FrmCatProd extends javax.swing.JFrame {
     }//GEN-LAST:event_fldNomCatProdActionPerformed
 
     private void btnGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseClicked
-        int op = JOptionPane.showConfirmDialog(null, "¿Desea guardar los datos registrados?", "Confirme los datos registrados", JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+        int op = JOptionPane.showConfirmDialog(null, "¿Desea guardar los datos registrados?", "Confirme los datos registrados", 
+                JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+        if(op == 0)
+        {
+          insertarDatos();
+        }
+        
     }//GEN-LAST:event_btnGuardarMouseClicked
-
-    private void imgSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgSalirMouseClicked
-          this.dispose();
-    }//GEN-LAST:event_imgSalirMouseClicked
 
     private void headerMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerMousePressed
         xMouse = evt.getX();
@@ -241,6 +286,22 @@ public class FrmCatProd extends javax.swing.JFrame {
         int y = evt.getYOnScreen();
         this.setLocation(x - xMouse, y - yMouse);
     }//GEN-LAST:event_headerMouseDragged
+
+    private void btnSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseClicked
+        Classes.ExecuteMenuOptions();
+        this.dispose();
+    }//GEN-LAST:event_btnSalirMouseClicked
+
+    private void btnModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarMouseClicked
+        String cod = jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
+        System.out.println(cod);
+        delete.eliminarTablaCod("cat_prod", "cod_cat_prod", cod);
+        mostrarDatos();
+    }//GEN-LAST:event_btnModificarMouseClicked
+
+    private void btnCancelar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelar1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCancelar1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -276,20 +337,54 @@ public class FrmCatProd extends javax.swing.JFrame {
             }
         });
     }
+    
+    private void mostrarDatos(){
 
+        ShowData data = new ShowData(2, column);
+        data.fillTables("cat_prod", jTable1);
+    }
+    
+    private void insertarDatos(){
+         String sql = "INSERT INTO cat_prod (cod_cat_prod, nombre)VALUES(?,?)";
+        try{
+            PreparedStatement pps = con.Conexion().prepareStatement(sql);
+            pps.setString(1, fldCodCatProd.getText());
+            pps.setString(2, fldNomCatProd.getText());
+            pps.executeUpdate();
+            if(fldCodCatProd.getText() != null && fldNomCatProd.getText() != null)
+            {
+            JOptionPane.showMessageDialog(null, "Guardado con éxito");
+            mostrarDatos();
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Los datos ingresados están vacíos...");
+            }
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+
+    private void actualizarDatos(JTextField codigo, JTextField nombre, String cod)
+    {
+        String sql = "update cat_prod set cod_cat_prod = ";
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel btnCancelar;
+    private javax.swing.JPanel btnCancelar1;
     private javax.swing.JPanel btnGuardar;
     private javax.swing.JPanel btnModificar;
+    private javax.swing.JLabel btnSalir;
     private javax.swing.JTextField fldCodCatProd;
     private javax.swing.JTextField fldNomCatProd;
     private javax.swing.JPanel header;
-    private javax.swing.JLabel imgFamProd;
-    private javax.swing.JLabel imgSalir;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblCatProds;
     private javax.swing.JLabel lblCodCatProd;
     private javax.swing.JLabel lblNomCatProd;

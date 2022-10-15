@@ -26,139 +26,69 @@ public class FormaPagoForms extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        BtnNuevo = new javax.swing.JButton();
-        BtnNuevo1 = new javax.swing.JButton();
-        BtnNuevo2 = new javax.swing.JButton();
-        BtnNuevo3 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         LblRegistro = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        TxtCliente = new javax.swing.JTextField();
-        TxtCliente1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jPanelBlue = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        txtCod = new javax.swing.JLabel();
+        fldCod = new javax.swing.JTextField();
+        txtCod1 = new javax.swing.JLabel();
+        fldCod1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(LblRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(877, 12, 85, 37));
 
-        BtnNuevo.setText("Nuevo");
-        BtnNuevo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnNuevoActionPerformed(evt);
-            }
-        });
+        jPanelBlue.setBackground(new java.awt.Color(51, 153, 255));
 
-        BtnNuevo1.setText("Nuevo");
-        BtnNuevo1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnNuevo1ActionPerformed(evt);
-            }
-        });
-
-        BtnNuevo2.setText("Nuevo");
-        BtnNuevo2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnNuevo2ActionPerformed(evt);
-            }
-        });
-
-        BtnNuevo3.setText("Nuevo");
-        BtnNuevo3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnNuevo3ActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("Registrados");
-
-        jLabel2.setText("Monto a Cobrar");
-
-        jLabel3.setText("NIT del cliente");
-
-        jLabel4.setText("Forma de Pago");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Efectivo", "Tarjeta de Crédito" }));
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(BtnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(LblRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(BtnNuevo2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(BtnNuevo1, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(BtnNuevo3, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(TxtCliente)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(TxtCliente1, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+        javax.swing.GroupLayout jPanelBlueLayout = new javax.swing.GroupLayout(jPanelBlue);
+        jPanelBlue.setLayout(jPanelBlueLayout);
+        jPanelBlueLayout.setHorizontalGroup(
+            jPanelBlueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(11, 11, 11)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(LblRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(BtnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(TxtCliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(TxtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtnNuevo2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnNuevo1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnNuevo3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30))
+        jPanelBlueLayout.setVerticalGroup(
+            jPanelBlueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 650, Short.MAX_VALUE)
         );
+
+        getContentPane().add(jPanelBlue, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 40, 650));
+
+        jLabel5.setFont(new java.awt.Font("Roboto Cn", 1, 48)); // NOI18N
+        jLabel5.setText("FORMAS DE PAGOS");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 50, -1, -1));
+
+        txtCod.setFont(new java.awt.Font("Roboto", 1, 30)); // NOI18N
+        txtCod.setText("Nombre de forma de pago:");
+        getContentPane().add(txtCod, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 310, 440, -1));
+
+        fldCod.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fldCodActionPerformed(evt);
+            }
+        });
+        getContentPane().add(fldCod, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 380, 620, 50));
+
+        txtCod1.setFont(new java.awt.Font("Roboto", 1, 30)); // NOI18N
+        txtCod1.setText("Codigo forma de pago:");
+        getContentPane().add(txtCod1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 320, -1));
+
+        fldCod1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fldCod1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(fldCod1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 620, 50));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BtnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNuevoActionPerformed
+    private void fldCodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fldCodActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BtnNuevoActionPerformed
+    }//GEN-LAST:event_fldCodActionPerformed
 
-    private void BtnNuevo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNuevo1ActionPerformed
+    private void fldCod1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fldCod1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BtnNuevo1ActionPerformed
-
-    private void BtnNuevo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNuevo2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BtnNuevo2ActionPerformed
-
-    private void BtnNuevo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnNuevo3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BtnNuevo3ActionPerformed
+    }//GEN-LAST:event_fldCod1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -196,18 +126,12 @@ public class FormaPagoForms extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnNuevo;
-    private javax.swing.JButton BtnNuevo1;
-    private javax.swing.JButton BtnNuevo2;
-    private javax.swing.JButton BtnNuevo3;
     private javax.swing.JLabel LblRegistro;
-    private javax.swing.JTextField TxtCliente;
-    private javax.swing.JTextField TxtCliente1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTextField fldCod;
+    private javax.swing.JTextField fldCod1;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanelBlue;
+    private javax.swing.JLabel txtCod;
+    private javax.swing.JLabel txtCod1;
     // End of variables declaration//GEN-END:variables
 }

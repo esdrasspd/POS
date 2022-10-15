@@ -410,6 +410,7 @@ public class FrmMenuOptions extends javax.swing.JFrame {
 
     private void PnlFamiliaProdMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PnlFamiliaProdMouseClicked
         logic.Classes.ExecuteCatProd();
+        this.dispose();
     }//GEN-LAST:event_PnlFamiliaProdMouseClicked
 
     /**

@@ -3,7 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/serho/Documents/NetBeansProjects/Formain/src/main/Main.java</file>
+            <file>file:/C:/Users/serho/Documents/NetBeansProjects/Formain/src/conections/UpdateData.java</file>
+            <file>file:/C:/Users/serho/Documents/NetBeansProjects/Formain/src/conections/ShowData.java</file>
+            <file>file:/C:/Users/serho/Documents/NetBeansProjects/Formain/src/Forms/FrmCatProd.java</file>
+            <file>file:/C:/Users/serho/Documents/NetBeansProjects/Formain/src/conections/ConnectionSQL.java</file>
+            <file>file:/C:/Users/serho/Documents/NetBeansProjects/Formain/src/conections/DeleteData.java</file>
         </group>
     </open-files>
 </project-private>
