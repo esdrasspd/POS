@@ -4,6 +4,7 @@
  */
 package conections;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
@@ -13,15 +14,19 @@ import javax.swing.JOptionPane;
  * @author serho
  */
 public class DeleteData {
+    private static DeleteData delete;
     
+    private DeleteData()
+    {
+        
+    }
     private void eliminarTablaId(Integer id, String table, String column){
         
         String sql = "DELETE from "+table+"WHERE "+column+"="+id;
         Statement st;
-        ConnectionSQL con = new ConnectionSQL();
         try
         {
-            st = con.Conexion().createStatement();
+            st = ConnectionSQL.getConnectionSQL().Conexion().createStatement();
             int rs = st.executeUpdate(sql);
             JOptionPane.showMessageDialog(null, "Se ha eliminado correctamente.");
         }catch (SQLException e)
@@ -34,17 +39,24 @@ public class DeleteData {
         public void eliminarTablaCod(String table, String column, String cod){
         
         String sql = "delete from "+table+" where "+column+" = "+cod;
-            System.out.println(sql);
+        System.out.println(sql);
         Statement st;
-        ConnectionSQL con = new ConnectionSQL();
         try
         {
-            st = con.Conexion().createStatement();
-            int rs = st.executeUpdate(sql);
+            PreparedStatement pps = ConnectionSQL.getConnectionSQL().Conexion().prepareStatement(sql);
+            pps.executeUpdate();
             JOptionPane.showMessageDialog(null, "Se ha eliminado correctamente.");
         }catch (SQLException e)
         {
             JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
         } 
     }
+        public synchronized static DeleteData getDeleteData()
+        {
+            if(delete == null)
+            {
+                delete = new DeleteData();
+            }
+            return delete;
+        }
 }

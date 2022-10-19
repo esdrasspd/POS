@@ -11,24 +11,26 @@ import conections.ShowData;
 import java.sql.PreparedStatement;
 import conections.ConnectionSQL;
 import conections.DeleteData;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-
+import conections.ShowData;
+import conections.InsertData;
 
 /**
  *
  * @author serho
  */
 public class FrmCatProd extends javax.swing.JFrame {
-    ConnectionSQL con = new ConnectionSQL();
-    DeleteData delete = new DeleteData();
 
-    int xMouse, yMouse;
-    List<String> column = new ArrayList<>();
+    private String nombreColumnas = "cod_cat_prod, nombre";
+    private List<String> interrogaciones = new ArrayList<>();
+
+    private int xMouse, yMouse;
+    private String nombreTabla = "cat_prod";
+    private List<String> column = new ArrayList<>();
+    private List<String> campos = new ArrayList<>();
     /**
      * Creates new form FrmCatProd
      */
@@ -37,8 +39,11 @@ public class FrmCatProd extends javax.swing.JFrame {
         AddImage.SetImageLabel(btnSalir, "src/images/atras.png");
         column.add("Codigo");
         column.add("Nombre de la categoria o familia");
+        
         this.setLocationRelativeTo(this);
-        mostrarDatos();
+        
+        ShowData.getShowData().mostrarDatos(nombreTabla, jTable1, 2, column);
+
     }
 
     /**
@@ -64,7 +69,7 @@ public class FrmCatProd extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         btnSalir = new javax.swing.JLabel();
-        btnCancelar1 = new javax.swing.JPanel();
+        btnEliminar = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -225,35 +230,35 @@ public class FrmCatProd extends javax.swing.JFrame {
         });
         getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 520, 190, 100));
 
-        btnCancelar1.setBackground(new java.awt.Color(255, 51, 51));
-        btnCancelar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCancelar1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnEliminar.setBackground(new java.awt.Color(255, 51, 51));
+        btnEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnCancelar1MouseClicked(evt);
+                btnEliminarMouseClicked(evt);
             }
         });
 
         jLabel5.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         jLabel5.setText("Eliminar");
 
-        javax.swing.GroupLayout btnCancelar1Layout = new javax.swing.GroupLayout(btnCancelar1);
-        btnCancelar1.setLayout(btnCancelar1Layout);
-        btnCancelar1Layout.setHorizontalGroup(
-            btnCancelar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnCancelar1Layout.createSequentialGroup()
+        javax.swing.GroupLayout btnEliminarLayout = new javax.swing.GroupLayout(btnEliminar);
+        btnEliminar.setLayout(btnEliminarLayout);
+        btnEliminarLayout.setHorizontalGroup(
+            btnEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnEliminarLayout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addComponent(jLabel5)
                 .addContainerGap(41, Short.MAX_VALUE))
         );
-        btnCancelar1Layout.setVerticalGroup(
-            btnCancelar1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnCancelar1Layout.createSequentialGroup()
+        btnEliminarLayout.setVerticalGroup(
+            btnEliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnEliminarLayout.createSequentialGroup()
                 .addContainerGap(28, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addGap(23, 23, 23))
         );
 
-        getContentPane().add(btnCancelar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 520, 170, 80));
+        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 520, 170, 80));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -267,13 +272,19 @@ public class FrmCatProd extends javax.swing.JFrame {
     }//GEN-LAST:event_fldNomCatProdActionPerformed
 
     private void btnGuardarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseClicked
+        campos.add(fldCodCatProd.getText());
+        campos.add(fldNomCatProd.getText());
+        
         int op = JOptionPane.showConfirmDialog(null, "¿Desea guardar los datos registrados?", "Confirme los datos registrados", 
                 JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
         if(op == 0)
         {
-          insertarDatos();
+            InsertData.getInsertData().insertarDatos(nombreTabla, interrogaciones, column, nombreColumnas, campos);
+            fldCodCatProd.setText("");
+            fldNomCatProd.setText("");
+            ShowData.getShowData().mostrarDatos(nombreTabla, jTable1, 2, column);
         }
-        
+ 
     }//GEN-LAST:event_btnGuardarMouseClicked
 
     private void headerMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_headerMousePressed
@@ -293,15 +304,23 @@ public class FrmCatProd extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirMouseClicked
 
     private void btnModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarMouseClicked
-        String cod = jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
-        System.out.println(cod);
-        delete.eliminarTablaCod("cat_prod", "cod_cat_prod", cod);
-        mostrarDatos();
+        
     }//GEN-LAST:event_btnModificarMouseClicked
 
-    private void btnCancelar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelar1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnCancelar1MouseClicked
+    private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
+        //Eliminar datos
+        String parcial = jTable1.getValueAt(jTable1.getSelectedRow(), 0).toString();
+        String cod = parcial;
+        System.out.println(cod);
+        int op = JOptionPane.showConfirmDialog(null, "¿Desea eliminar los datos?", "Confirme si desea eliminar", 
+                JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+        if(op == 0)
+        {
+            DeleteData.getDeleteData().eliminarTablaCod("cat_prod", "cod_cat_prod", cod);
+            ShowData.getShowData().mostrarDatos(nombreTabla, jTable1, 2, column);
+        }
+                
+    }//GEN-LAST:event_btnEliminarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -338,41 +357,10 @@ public class FrmCatProd extends javax.swing.JFrame {
         });
     }
     
-    private void mostrarDatos(){
 
-        ShowData data = new ShowData(2, column);
-        data.fillTables("cat_prod", jTable1);
-    }
-    
-    private void insertarDatos(){
-         String sql = "INSERT INTO cat_prod (cod_cat_prod, nombre)VALUES(?,?)";
-        try{
-            PreparedStatement pps = con.Conexion().prepareStatement(sql);
-            pps.setString(1, fldCodCatProd.getText());
-            pps.setString(2, fldNomCatProd.getText());
-            pps.executeUpdate();
-            if(fldCodCatProd.getText() != null && fldNomCatProd.getText() != null)
-            {
-            JOptionPane.showMessageDialog(null, "Guardado con éxito");
-            mostrarDatos();
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(null, "Los datos ingresados están vacíos...");
-            }
-            
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e);
-        }
-    }
-
-    private void actualizarDatos(JTextField codigo, JTextField nombre, String cod)
-    {
-        String sql = "update cat_prod set cod_cat_prod = ";
-    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel btnCancelar1;
+    private javax.swing.JPanel btnEliminar;
     private javax.swing.JPanel btnGuardar;
     private javax.swing.JPanel btnModificar;
     private javax.swing.JLabel btnSalir;

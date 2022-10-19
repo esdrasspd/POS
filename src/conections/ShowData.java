@@ -5,7 +5,6 @@ package conections;
  *
  * @author serho
  */
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -20,21 +19,21 @@ import java.util.List;
  */
 public class ShowData {
     
-    private final int nColumn; 
+    private int nColumn; 
     private List<String> column= new ArrayList<>();
+    private static ShowData showdata;
+    private String nombreTabla;
     
     
-    
-    public ShowData(int nColumn, List<String> column){
+    private ShowData(){
         this.nColumn = nColumn;
         this.column = column;
+        this.nombreTabla = nombreTabla;
     }
     
-        public void fillTables (String table, JTable visor) {
-        String sql = "Select * from " + table;
+        public void mostrarDatos (String nombreTabla, JTable visor, int nColumn, List<String> column) {
+        String sql = "Select * from " + nombreTabla;
         Statement st;
-        ConnectionSQL con = new ConnectionSQL();
-        Connection ConnectionSQL = con.Conexion();
         DefaultTableModel model = new DefaultTableModel();
         
         for(int i= 0; i<column.size(); i++)
@@ -46,7 +45,7 @@ public class ShowData {
         
         String [] dato = new String[nColumn];
         try{
-            st = ConnectionSQL.createStatement();
+            st = ConnectionSQL.getConnectionSQL().Conexion().createStatement();
             ResultSet rs = st.executeQuery(sql);
             while(rs.next())
             {
@@ -58,9 +57,16 @@ public class ShowData {
             }
         }catch(SQLException e) 
         {
-            e.printStackTrace();
+            e.getMessage();
         }
     }
-    
+        public synchronized static ShowData getShowData()
+        {
+            if(showdata == null)
+            {
+                showdata = new ShowData();
+            }
+            return showdata;
+        }
 }
 

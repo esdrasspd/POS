@@ -6,24 +6,24 @@ package Forms;
 
 import conections.ConnectionSQL;
 import java.awt.Color;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import logic.AddImage;
 import logic.Classes;
 
-
 /**
  *
  * @author Esdras Abel Sapón Díaz
  */
 public class FrmLogin extends javax.swing.JFrame {
-    
-    ConnectionSQL cc = new ConnectionSQL();
-    Connection con = cc.Conexion();
+
+    private int intentos = 0;
+
+ 
 
     int xMouse, yMouse;
+    
 
     /**
      * Creates new form FrmLogin
@@ -33,7 +33,7 @@ public class FrmLogin extends javax.swing.JFrame {
         this.setLocationRelativeTo(this);
         AddImage.SetImageLabel(lblImage1, "src/images/admin2.jpg");
         AddImage.SetImageLabel(lblIcon, "src/images/formain.png");
-        
+
     }
 
     /**
@@ -260,7 +260,7 @@ public class FrmLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_headerMouseDragged
 
     private void botonSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonSalirMouseClicked
-       System.exit(0); //salir del programa cuando se le de al boton salir
+        System.exit(0); //salir del programa cuando se le de al boton salir
     }//GEN-LAST:event_botonSalirMouseClicked
 
     private void botonIngresarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonIngresarMouseEntered
@@ -268,7 +268,7 @@ public class FrmLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_botonIngresarMouseEntered
 
     private void botonIngresarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonIngresarMouseExited
-        botonIngresar.setBackground(new Color(153,255,153)); //color original del boton ingresar
+        botonIngresar.setBackground(new Color(153, 255, 153)); //color original del boton ingresar
     }//GEN-LAST:event_botonIngresarMouseExited
 
     private void botonSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonSalirMouseEntered
@@ -276,68 +276,76 @@ public class FrmLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_botonSalirMouseEntered
 
     private void botonSalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonSalirMouseExited
-        botonSalir.setBackground(new Color(255,102,102)); //color original a boton salir
+        botonSalir.setBackground(new Color(255, 102, 102)); //color original a boton salir
     }//GEN-LAST:event_botonSalirMouseExited
 
     private void fldUsuarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fldUsuarioMousePressed
-        if(fldUsuario.getText().equals("Ingrese su nombre de usuario...")){
+        if (fldUsuario.getText().equals("Ingrese su nombre de usuario...")) {
             fldUsuario.setText("");
             fldUsuario.setForeground(Color.black);
         }
-        if (String.valueOf(fldContrasenia.getPassword()).equals("********")){
+        if (String.valueOf(fldContrasenia.getPassword()).equals("********")) {
             fldContrasenia.setText("********");
-            fldContrasenia.setForeground(new Color(204,204,204));
+            fldContrasenia.setForeground(new Color(204, 204, 204));
         } //codigo para arreglar el error de la letra de usuario
     }//GEN-LAST:event_fldUsuarioMousePressed
 
     private void fldContraseniaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_fldContraseniaMousePressed
-        if (String.valueOf(fldContrasenia.getPassword()).equals("********")){
-             fldContrasenia.setText("");
-             fldContrasenia.setForeground(Color.black);
+        if (String.valueOf(fldContrasenia.getPassword()).equals("********")) {
+            fldContrasenia.setText("");
+            fldContrasenia.setForeground(Color.black);
         }
-        if (fldUsuario.getText().isEmpty()){
-             fldUsuario.setText("Ingrese su nombre de usuario...");
-             fldUsuario.setForeground(new Color(204,204,204));
+        if (fldUsuario.getText().isEmpty()) {
+            fldUsuario.setText("Ingrese su nombre de usuario...");
+            fldUsuario.setForeground(new Color(204, 204, 204));
         } //codigo para arreglar el error de la letra de contraseña
-   
         
+        //Te amo mi princesa Ashley <3
+
+
     }//GEN-LAST:event_fldContraseniaMousePressed
 
     private void botonIngresarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonIngresarMousePressed
         LoginUser();
     }//GEN-LAST:event_botonIngresarMousePressed
 
-    
-    private void LoginUser(){
-        
-        int resultado=0;
-        String password=String.valueOf(fldContrasenia.getPassword()); //dar valor de nuestro field contraseña
-        String user=fldUsuario.getText(); //dar el valor de nuestro field Usuario
-        String SQL="select * from user where user='"+user+"' and password='"+password+"'";
-        
-        try{
-            Statement st = con.createStatement();
+    private void LoginUser() {
+
+        int resultado = 0;
+        String password = String.valueOf(fldContrasenia.getPassword()); //dar valor de nuestro field contraseña
+        String user = fldUsuario.getText(); //dar el valor de nuestro field Usuario
+        String SQL = "select * from user where user='" + user + "' and password='" + password + "'";
+
+        try {
+            Statement st = ConnectionSQL.getConnectionSQL().Conexion().createStatement();
             ResultSet rs = st.executeQuery(SQL);
-            
-            if(rs.next()){
+
+            if (rs.next()) {
                 resultado = 1;
-                
-                if(resultado==1){
+
+                if (resultado == 1) {
                     Classes.ExecuteMenuOptions();
-                    JOptionPane.showMessageDialog(null,"Datos correctos. Bienvenido al sistema Formain");
+                    JOptionPane.showMessageDialog(null, "Datos correctos. Bienvenido al sistema Formain");
                     this.dispose();
                 }
+
+            } else {
                 
-            }else{
-                JOptionPane.showMessageDialog(null,"Error, el usuario o contraseña son incorrectos...");
+                JOptionPane.showMessageDialog(null, "Error, el usuario o contraseña son incorrectos...");
+                intentos++;
+
+                if (intentos == 3) {
+                    JOptionPane.showMessageDialog(null, "Sus datos fueron incorrectos, se ha cerrado el programa por seguridad");
+                    this.dispose();
+                }
             }
-            
-        } catch (Exception e){
-            JOptionPane.showMessageDialog(null,"Error " + e.getMessage());
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error " + e.getMessage());
         }
-        
+
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel botonIngresar;
     private javax.swing.JPanel botonSalir;

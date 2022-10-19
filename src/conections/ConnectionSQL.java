@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 
 public class ConnectionSQL {
     Connection Conectar = null;
+    private static ConnectionSQL con; //objeto con
     
     public Connection Conexion(){
         try {
@@ -19,5 +20,21 @@ public class ConnectionSQL {
         return Conectar;
     }
     
+    //metodo constructor en privado
+    private ConnectionSQL()
+    {
+        Conexion();
+    }
+    
+    
+    //Singleton
+    public synchronized static ConnectionSQL getConnectionSQL()
+    {
+        if(con==null)
+        {
+            con = new ConnectionSQL();            
+        }
+        return con;
+    }
     
 }
