@@ -1,6 +1,6 @@
 package main;
-import logic.Classes;
-import conections.InsertData;
+import Model.Classes;
+import Model.InsertData;
 /**
  *
  * @author Esdras Abel Sapón Díaz
