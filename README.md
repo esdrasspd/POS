@@ -23,7 +23,8 @@
  
 
 Encargados del desarrollo:
-Esdras Abel Sapón Díaz            3090-21-2890
-Hugo Fernando Hoffens González    3090-21-8269
-Franklyn Eduardo Reynoso Matul    3090-21-4527
-Pablo David García Pérez          3090-20-2294
+
+1. Esdras Abel Sapón Díaz            3090-21-2890
+2. Hugo Fernando Hoffens González    3090-21-8269
+3. Franklyn Eduardo Reynoso Matul    3090-21-4527
+4. Pablo David García Pérez          3090-20-2294
