@@ -1,4 +1,4 @@
-# Formain
+# Proyecto de control de inventario, ventas y compras.
 
                                                         --- INSTALACIÓN DEL PROGRAMA ---
  
