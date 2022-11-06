@@ -1,6 +1,6 @@
 # Proyecto de control de inventario, ventas y compras.
 
-                                                        --- INSTALACIÓN DEL PROGRAMA ---
+                                                    --- INSTALACIÓN DEL PROGRAMA ---
  
  Para poder utilizar el programa es muy importante tomar en cuenta que hay que tener instalado el gestor de base de datos de PHPMYADMIN que utiliza el programa Xampp 
  que ocupa el puerto 80. Con saber esto, se puede proceder a la explicación de instalar el programa.
