@@ -23,19 +23,19 @@ public class FrmProd extends javax.swing.JFrame {
     private String id;
     
     private String buscar = "";
-    private String campoBuscar = "name";
+    private String campoBuscar = "description";
     
     public FrmProd() {
         initComponents();
         
         column.add("Id");
-        column.add("Nombre");
+        column.add("Descripción Producto");
         column.add("id Marca");
         column.add("id Medida");
         column.add("id Sección");
         column.add("id Categoría");
         
-        nombreColumnas.add("name");
+        nombreColumnas.add("description");
         nombreColumnas.add("id_brand");
         nombreColumnas.add("id_measure");
         nombreColumnas.add("id_section");
@@ -261,7 +261,7 @@ public class FrmProd extends javax.swing.JFrame {
         getContentPane().add(header, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1420, 30));
 
         lblName.setFont(new java.awt.Font("Roboto", 1, 18)); // NOI18N
-        lblName.setText("Nombre del producto:");
+        lblName.setText("Descripción del Producto");
         getContentPane().add(lblName, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 60, -1, 30));
 
         fldName.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N

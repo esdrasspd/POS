@@ -31,6 +31,7 @@ public class FrmShopping extends javax.swing.JFrame {
         
         column.add("Id");
         column.add("Cantidad");
+        column.add("Precio");
         column.add("Fecha");
         column.add("ID Producto");
         column.add("ID Usuario");

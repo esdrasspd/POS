@@ -606,14 +606,17 @@ public class FrmMenuOptions extends javax.swing.JFrame {
 
     private void PnlUsuariosDRMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PnlUsuariosDRMouseClicked
         Model.Classes.ExecuteUsers();
+        this.dispose();
     }//GEN-LAST:event_PnlUsuariosDRMouseClicked
 
     private void pnlVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlVentasMouseClicked
         Model.Classes.ExecuteSales();
+        this.dispose();
     }//GEN-LAST:event_pnlVentasMouseClicked
 
     private void pnlComprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlComprasMouseClicked
         Model.Classes.ExecuteShopping();
+        this.dispose();
     }//GEN-LAST:event_pnlComprasMouseClicked
 
     private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
